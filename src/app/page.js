@@ -1,103 +1,158 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+import { useState } from "react";
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+export default function homepage(){
+    const [leftOpen, setLeftOpen] = useState(false)
+    const [rightOpen, setrightOpen] = useState(false)
+
+    function openLeft(){
+        setLeftOpen(true)
+        setrightOpen(false)
+    }
+
+    function openRight(){
+        setLeftOpen(false)
+        setrightOpen(true)
+    }
+
+    function closeBoth(){
+        setLeftOpen(false)
+        setrightOpen(false)
+    }
+
+    return(
+        <main className="flex min-h-screen relative">
+          {/* LEFT SIDEBAR */}
+          <aside
+            onMouseEnter={openLeft}
+            onMouseLeave={closeBoth}
+            className={`bg-black bg-opacity-90 text-white h-screen fixed top-0 left-0 z-20
+              overflow-hidden transition-[width] duration-300 ease-in-out
+              ${leftOpen ? "w-60" : "w-0"}`}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+            {leftOpen && (
+              <h2 className="p-4 font-bold border-b border-purple-700 text-white">Navigation</h2>
+            )}
+
+            {/* {sidebar navigation content} */}
+          </aside>
+
+          {/* LEFT SIDEBAR HOTSPOT */}
+          <div
+            onMouseEnter={openLeft}
+            className="hidden md:block fixed top-0 left-0 z-10 h-screen w-2 bg-purple-600 opacity-20 hover:opacity-60 cursor-pointer transition-opacity duration-300"
+          />
+
+            {/* RIGHT SIDEBAR */}
+            <aside
+              onMouseEnter={openRight}
+              onMouseLeave={closeBoth}
+              className={`bg-black bg-opacity-90 text-white h-screen fixed top-0 right-0 z-20
+                overflow-hidden transition-[width] duration-300 ease-in-out
+                ${rightOpen ? "w-60" : "w-0"}`}
+            >
+              <h2 className="p-4 font-bold border-b border-purple-700 text-white">Leaderboards</h2>
+
+              {rightOpen && (
+                <div className="p-4 text-sm text-white">
+                  <p>🔥 Top Creators</p>
+                  <ul className="mt-2 space-y-1">
+                    <li>1. @creatorone — 142 hooks</li>
+                    <li>2. @you — 87 hooks</li>
+                    <li>3. @hookgod — 63 hooks</li>
+                  </ul>
+                </div>
+              )}
+            </aside>
+
+            {/* RIGHT SIDEBAR HOTSPOT */}
+            <div
+              onMouseEnter={openRight}
+              className="hidden md:block fixed top-0 right-0 z-10 h-screen w-2 bg-purple-600 opacity-20 hover:opacity-60 cursor-pointer transition-opacity duration-300"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+            {/* {center content} */}
+              <section
+                style={{
+                  left: leftOpen ? "15rem" : "0",
+                  right: rightOpen ? "15rem" : "0",
+                }}
+                className="min-h-screen fixed overflow-auto transition-all duration-300 ease-in-out
+                          bg-gradient-to-b from-[#0a0a0a] via-[#120316] to-[#0a0a0a]
+                          text-gray-200 p-8 shadow-inner"
+              >
+
+
+        
+        {/* Mobile toggle buttons */}
+        <div className="flex justify-between mb-4">
+           <button
+            onClick={() => {
+              if (leftOpen) closeBoth();
+              else openLeft();
+            }}
+            className="md:hidden p-2 bg-gray-800 text-white rounded"
           >
-            Read our docs
-          </a>
+            ☰
+          </button>
+          <button
+            onClick={() => {
+              if (rightOpen) closeBoth();
+              else openRight();
+            }}
+            className="md:hidden p-2 bg-gray-600 text-white rounded"
+          >
+            🏆                                                                           
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+        
+{/* Your homepage content */}
+<div className="max-w-5xl mx-auto">
+
+  {/* Header */}
+  <h1 className="text-4xl font-bold text-purple-300 mb-2">HookyFY</h1>
+  <p className="text-sm text-gray-400 mb-6">Welcome back, Creator ⚡</p>
+
+  {/* Stats */}
+  <div className="mb-6">
+    <p className="text-lg text-gray-300">
+      You’ve generated <span className="text-purple-500 font-semibold">87</span> hooks so far.
+    </p>
+  </div>
+
+  {/* Recent Hooks */}
+  <div className="bg-[#141414] border border-gray-800 p-4 rounded-xl shadow-inner mb-6">
+    <h2 className="text-xl text-purple-400 font-semibold mb-3">Your Last 3 Hooks</h2>
+    <ul className="space-y-2 text-sm">
+      <li className="bg-[#1f1f1f] p-3 rounded text-gray-200">"What if everything they taught you was a lie?"</li>
+      <li className="bg-[#1f1f1f] p-3 rounded text-gray-200">"He started with nothing. Today, he owns the game."</li>
+      <li className="bg-[#1f1f1f] p-3 rounded text-gray-200">"You only need 7 seconds to trigger obsession."</li>
+    </ul>
+  </div>
+
+  {/* Zeigarnik Effect */}
+  <div className="bg-gradient-to-r from-purple-900 to-black p-4 rounded-xl mb-6 border border-purple-800 shadow-md">
+    <h2 className="text-lg text-purple-300 font-semibold mb-1">Something’s Missing...</h2>
+    <p className="text-sm text-gray-300 mb-2">You’ve generated hooks. But the next one could go viral.</p>
+    <button className="mt-2 px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-600 transition">
+      Generate One More
+    </button>
+  </div>
+
+  {/* Tips Box */}
+  <div className="bg-[#101010] p-4 rounded-xl border border-gray-700">
+    <h3 className="text-md text-purple-300 font-bold mb-2">⚡ Quick Tips</h3>
+    <ul className="list-disc list-inside text-gray-400 text-sm space-y-1">
+      <li>Keep your hook under 12 words.</li>
+      <li>Use contrast: shock vs calm, rich vs poor, light vs dark.</li>
+      <li>Don’t end the sentence — let them fill in the blank.</li>
+    </ul>
+  </div>
+
+</div>
+</section>
+</main>
+)
 }

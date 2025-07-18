@@ -1,26 +1,39 @@
-@import "tailwindcss";
+@import "tailwindcss/preflight"; /* Only includes browser resets */
+@import "tailwindcss/utilities"; /* Includes Tailwind utilities */
 
+/* Optional: You can import theme.css if you want extra theme variables */
+@import "tailwindcss/theme"; 
+
+/* Custom CSS Theme */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --accent: #a855f7; /* Purple */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Now your custom global styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-black text-purple-400;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+button {
+  background-color: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+input, textarea {
+  background-color: #1a1a1a;
+  color: white;
+  border: 1px solid #333;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
 }
