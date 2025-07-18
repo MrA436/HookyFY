@@ -32,6 +32,7 @@ UI/UX mockups are being built using **Next.js (App Router)** and **TailwindCSS**
 ```bash
 npm install
 npm run dev
+```
 
 Then visit 👉 http://localhost:3000
 
