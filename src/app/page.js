@@ -1,5 +1,5 @@
 'use client';
-
+import Link from "next/link";
 import { useState } from "react";
 
 
@@ -73,16 +73,16 @@ export default function homepage(){
               className="hidden md:block fixed top-0 right-0 z-10 h-screen w-2 bg-purple-600 opacity-20 hover:opacity-60 cursor-pointer transition-opacity duration-300"
             />
 
-            {/* {center content} */}
-              <section
-                style={{
-                  left: leftOpen ? "15rem" : "0",
-                  right: rightOpen ? "15rem" : "0",
-                }}
-                className="min-h-screen fixed overflow-auto transition-all duration-300 ease-in-out
-                          bg-gradient-to-b from-[#0a0a0a] via-[#120316] to-[#0a0a0a]
-                          text-gray-200 p-8 shadow-inner"
-              >
+            <section
+              style={{
+                left: leftOpen ? "15rem" : "0",
+                right: rightOpen ? "15rem" : "0",
+              }}
+              className="min-h-screen absolute top-0 bottom-0 overflow-auto transition-all duration-300 ease-in-out
+                        bg-gradient-to-b from-[#0a0a0a] via-[#120316] to-[#0a0a0a]
+                        text-gray-200 p-8 shadow-inner"
+            >
+
 
 
         
@@ -133,12 +133,15 @@ export default function homepage(){
   </div>
 
   {/* Zeigarnik Effect */}
+
   <div className="bg-gradient-to-r from-purple-900 to-black p-4 rounded-xl mb-6 border border-purple-800 shadow-md">
     <h2 className="text-lg text-purple-300 font-semibold mb-1">Something’s Missing...</h2>
     <p className="text-sm text-gray-300 mb-2">You’ve generated hooks. But the next one could go viral.</p>
-    <button className="mt-2 px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-600 transition">
-      Generate One More
-    </button>
+    <Link href="/generate" passHref>
+      <button className="mt-2 px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-600 transition">
+        Generate One More
+      </button>
+    </Link>
   </div>
 
   {/* Tips Box */}
