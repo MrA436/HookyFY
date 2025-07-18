@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# HookyFY – WIP 🧠✨
 
-## Getting Started
+HookyFY is a creative tool designed to generate attention-grabbing hooks for creators, copywriters, and marketers.
 
-First, run the development server:
+---
+
+### 🚧 Status
+
+This project is currently **in active development**.  
+UI/UX mockups are being built using **Next.js (App Router)** and **TailwindCSS**.
+
+---
+
+### 📦 Tech Stack
+
+- Next.js 14 (App Router)
+- Tailwind CSS
+- React
+
+---
+
+### 📁 Structure (so far)
+
+- `app/page.js` – Homepage layout
+- `components/` – (WIP)
+- `styles/global.css` – Global Tailwind setup
+
+---
+
+### 🔧 Run Locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then visit 👉 http://localhost:3000
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+🧠 Planned Features (Coming Soon)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ - AI-powered Hook Generator (based on psychology triggers)
 
-## Learn More
+- Save, favorite, and filter hooks
 
-To learn more about Next.js, take a look at the following resources:
+- Creator Leaderboard + Stats panel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Export hooks (copy/CSV/pdf, etc.)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Responsive & slick dark UI
 
-## Deploy on Vercel
+- Zeigarnik Effect-based idea enhancer
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- HookyTips – daily tactical writing boosts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+📢 Disclaimer
+This is not the final product. It’s 10% structure, 90% vision right now.
+The goal is to ship fast, iterate even faster, and drop something fire. 🔥
+
+💡 Built with caffeine, obsession, and way too many rewrites.
