@@ -42,7 +42,7 @@ export default function homepage(){
           {/* LEFT SIDEBAR HOTSPOT */}
           <div
             onMouseEnter={openLeft}
-            className="hidden md:block fixed top-0 left-0 z-10 h-screen w-2 bg-purple-600 opacity-20 hover:opacity-60 cursor-pointer transition-opacity duration-300"
+            className="hidden md:block fixed top-0 left-0 z-10 h-screen w-1 bg-purple-600 opacity-20 hover:opacity-60 cursor-pointer transition-opacity duration-300"
           />
 
             {/* RIGHT SIDEBAR */}
@@ -70,7 +70,7 @@ export default function homepage(){
             {/* RIGHT SIDEBAR HOTSPOT */}
             <div
               onMouseEnter={openRight}
-              className="hidden md:block fixed top-0 right-0 z-10 h-screen w-2 bg-purple-600 opacity-20 hover:opacity-60 cursor-pointer transition-opacity duration-300"
+              className="hidden md:block fixed top-0 right-0 z-10 h-screen w-1 bg-purple-600 opacity-20 hover:opacity-60 cursor-pointer transition-opacity duration-300"
             />
 
             <section
