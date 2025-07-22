@@ -24,26 +24,6 @@ export default function homepage(){
 
     return(
         <main className="flex min-h-screen relative">
-          {/* LEFT SIDEBAR */}
-          <aside
-            onMouseEnter={openLeft}
-            onMouseLeave={closeBoth}
-            className={`bg-black bg-opacity-90 text-white h-screen fixed top-0 left-0 z-20
-              overflow-hidden transition-[width] duration-300 ease-in-out
-              ${leftOpen ? "w-60" : "w-0"}`}
-          >
-            {leftOpen && (
-              <h2 className="p-4 font-bold border-b border-purple-700 text-white">Navigation</h2>
-            )}
-
-            {/* {sidebar navigation content} */}
-          </aside>
-
-          {/* LEFT SIDEBAR HOTSPOT */}
-          <div
-            onMouseEnter={openLeft}
-            className="hidden md:block fixed top-0 left-0 z-10 h-screen w-1 bg-purple-600 opacity-20 hover:opacity-60 cursor-pointer transition-opacity duration-300"
-          />
 
             {/* RIGHT SIDEBAR */}
             <aside
@@ -70,7 +50,7 @@ export default function homepage(){
             {/* RIGHT SIDEBAR HOTSPOT */}
             <div
               onMouseEnter={openRight}
-              className="hidden md:block fixed top-0 right-0 z-10 h-screen w-1 bg-purple-600 opacity-20 hover:opacity-60 cursor-pointer transition-opacity duration-300"
+              className="hidden md:block fixed top-0 right-0 z-10 h-screen w-2 bg-purple-600 opacity-20 hover:opacity-60 cursor-pointer transition-opacity duration-300"
             />
 
             <section
@@ -109,7 +89,7 @@ export default function homepage(){
         </div>
         
 {/* Your homepage content */}
-<div className="max-w-5xl mx-auto">
+<div className="w-full max-w-screen-xl px-4 py-8 mx-auto">
 
   {/* Header */}
   <h1 className="text-4xl font-bold text-purple-300 mb-2">HookyFY</h1>

@@ -1,23 +1,24 @@
-@import "tailwindcss/preflight"; /* Only includes browser resets */
-@import "tailwindcss/utilities"; /* Includes Tailwind utilities */
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+/* Removed theme import — it's not part of official Tailwind modules unless custom configured */
+@import "tailwindcss/theme";
 
-/* Optional: You can import theme.css if you want extra theme variables */
-@import "tailwindcss/theme"; 
-
-/* Custom CSS Theme */
+/* === Custom Theme Vars === */
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
   --accent: #a855f7; /* Purple */
 }
 
-
-/* Now your custom global styles */
+/* === Global Body Style === */
 body {
   @apply bg-black text-purple-400;
   font-family: var(--font-geist-sans), Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
+/* === Element Resets / Styling === */
 a {
   color: var(--accent);
   text-decoration: none;
@@ -37,10 +38,12 @@ input, textarea {
   padding: 0.5rem;
   border-radius: 0.25rem;
 }
+
+/* === Slider Styling === */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  height: 14px; /* even thicker */
+  height: 14px;
   border-radius: 999px;
   background: transparent;
 }
@@ -69,4 +72,28 @@ input[type="range"]::-moz-range-thumb {
   box-shadow: 0 0 5px rgba(124, 58, 237, 0.4);
 }
 
+/* === Full Viewport Setup === */
+html, body, #__next {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
+/* === Sidebar Behavior === */
+body.sidebar-expanded #main-content {
+  margin-left: 15rem;
+}
+
+@media (min-width: 768px) {
+  body:not(.sidebar-expanded) #main-content {
+    margin-left: 3rem;
+  }
+}
+
+/* === Debug Borders (Remove When Done) ===
+* {
+  outline: 1px solid red !important;
+  box-sizing: border-box;
+} */

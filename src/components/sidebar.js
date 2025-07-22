@@ -1,48 +1,39 @@
 "use client";
 import { useState } from "react";
-import { Menu, X } from "lucide-react"; // Lucide gives modern icons, already included in shadcn setups
-import Link from "next/link";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const links = [
-    { name: "Dashboard", href: "#" },
-    { name: "Hook Generator", href: "#" },
-    { name: "Saved Hooks", href: "#" },
-    { name: "Account Settings", href: "#" },
-  ];
-
   return (
-    <>
-      {/* Toggle Button */}
-      <button
-        className="fixed top-4 left-4 z-50 p-2 bg-purple-700 hover:bg-purple-800 text-white rounded-lg shadow-lg transition duration-300 lg:hidden"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {isOpen ? <X size={20} /> : <Menu size={20} />}
-      </button>
+    <div className="relative h-full">
+      {/* Hover hotspot when collapsed (overlay, no layout shift) */}
+      {!isOpen && (
+        <div
+          onMouseEnter={() => setIsOpen(true)}
+          className="absolute top-0 left-0 h-full w-2 bg-purple-600 opacity-10 hover:opacity-40 cursor-pointer z-10"
+        />
+      )}
 
-      {/* Sidebar */}
+      {/* Sidebar panel */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-zinc-900 border-r border-zinc-800 p-6 pt-16 transition-transform duration-300 z-40
-        ${isOpen ? "translate-x-0" : "-translate-x-full"}
-        lg:translate-x-0 lg:pt-10`}
+        onMouseLeave={() => setIsOpen(false)}
+        className={`h-full bg-black bg-opacity-90 text-white transition-all duration-300 ease-in-out
+          ${isOpen ? "w-60" : "w-0"} overflow-hidden`}
       >
-        <h2 className="text-xl font-bold text-white mb-8">📌 Navigation</h2>
-        <ul className="space-y-4">
-          {links.map((link, index) => (
-            <li key={index}>
-              <Link
-                href={link.href}
-                className="block text-purple-300 hover:text-white transition font-medium"
-              >
-                {link.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {isOpen && (
+          <div className="w-full h-full flex flex-col">
+            <h2 className="p-4 border-b border-purple-700 font-bold">
+              Navigation
+            </h2>
+            <nav className="flex flex-col p-4 space-y-3">
+              <a href="#" className="hover:text-purple-400">Dashboard</a>
+              <a href="#" className="hover:text-purple-400">Hook Generator</a>
+              <a href="#" className="hover:text-purple-400">Saved Hooks</a>
+              <a href="#" className="hover:text-purple-400">Account Settings</a>
+            </nav>
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 }
