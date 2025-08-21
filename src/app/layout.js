@@ -1,7 +1,7 @@
-// layout.js
+// app/layout.js
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Sidebar from "../components/sidebar";
+import ClientLayout from "../components/ClientLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,12 +24,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-black text-purple-400 m-0 p-0`}
       >
-        <div className="flex h-full w-full overflow-hidden">
-          <Sidebar />
-          <main className="flex-1 overflow-y-auto">
-            {children}
-          </main>
-        </div>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

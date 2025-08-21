@@ -61,7 +61,7 @@ export default function HookSetsDisplay({ sets, submitted }) {
     },
   ];
 
-// Limit data to requested number of sets
+  // Limit data to requested number of sets
   const limitedData = allData.slice(0, Math.min(sets, allData.length));
 
   // Copy handler
@@ -99,31 +99,29 @@ ${set.payoff}
           <p><strong>CTA:</strong> {cta}</p>
           <p><strong>Payoff:</strong> {payoff}</p>
 
-        <div className="mt-4 flex justify-between items-center">
-          <button
-            onClick={() => handleSave(index)}
-            className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 rounded-xl text-sm font-semibold text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
-            aria-label="Save hook set"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-            Save
-          </button>
+          <div className="mt-4 flex justify-between items-center">
+            <button
+              onClick={() => handleSave(index)}
+              className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 rounded-xl text-sm font-semibold text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
+              aria-label="Save hook set"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              Save
+            </button>
 
-          <button
-            onClick={() => handleCopy({ hook, caption, cta, payoff })}
-            className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 rounded-xl text-sm font-semibold text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
-            aria-label="Copy hook set to clipboard"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8 16h8M8 12h8m-8-4h8M5 20h14a2 2 0 002-2v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2z" />
-            </svg>
-            Copy
-          </button>
-        </div>
-
-
+            <button
+              onClick={() => handleCopy({ hook, caption, cta, payoff })}
+              className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 rounded-xl text-sm font-semibold text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
+              aria-label="Copy hook set to clipboard"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 16h8M8 12h8m-8-4h8M5 20h14a2 2 0 002-2v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2z" />
+              </svg>
+              Copy
+            </button>
+          </div>
         </div>
       ))}
     </div>

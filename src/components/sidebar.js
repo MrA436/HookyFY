@@ -1,39 +1,80 @@
 "use client";
-import { useState } from "react";
+import React from "react";
+import { Menu } from "lucide-react";
 
-export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
-
+export default function Sidebar({ isOpen, openSidebar, closeSidebar }) {
   return (
-    <div className="relative h-full">
-      {/* Hover hotspot when collapsed (overlay, no layout shift) */}
-      {!isOpen && (
+    <>
+      {/* 🔥 BACKGROUND OVERLAY (click to close) */}
+      {isOpen && (
         <div
-          onMouseEnter={() => setIsOpen(true)}
-          className="absolute top-0 left-0 h-full w-2 bg-purple-600 opacity-10 hover:opacity-40 cursor-pointer z-10"
+          className="fixed inset-0 z-20 bg-black/30 backdrop-blur-[1px] transition-opacity duration-300"
+          onClick={closeSidebar}
         />
       )}
 
-      {/* Sidebar panel */}
+      {/* 🟣 TOGGLE BUTTON - Only show when sidebar is closed */}
+      {!isOpen && (
+        <button
+          onClick={openSidebar}  // calls openLeftSidebar from parent
+          className="fixed z-40 bottom-6 left-6 p-3 rounded-full text-white shadow-xl
+                    bg-gradient-to-tr from-[#0b0612] to-[#000000]
+                    hover:from-[#140a1e] hover:to-[#050505]
+                    transition-all duration-300 ease-in-out
+                    md:top-4 md:left-4 md:bottom-auto md:rounded-lg"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+      )}
+
+      
+      {/* 🟣 DESKTOP HOVER HOTSPOT - hidden on mobile */}
+      {!isOpen && (
+        <div
+          onMouseEnter={openSidebar}
+          className="absolute top-0 left-0 h-full w-2 bg-purple-600 opacity-10 hover:opacity-40 cursor-pointer z-10 hidden md:block"
+        />
+      )}
+
+      {/* 🎯 SIDEBAR PANEL */}
       <div
-        onMouseLeave={() => setIsOpen(false)}
-        className={`h-full bg-black bg-opacity-90 text-white transition-all duration-300 ease-in-out
-          ${isOpen ? "w-60" : "w-0"} overflow-hidden`}
+        onMouseLeave={closeSidebar}
+        className={`fixed top-0 left-0 h-full z-30 text-white transition-all duration-300 ease-in-out
+          border-r border-purple-800 shadow-xl rounded-r-xl flex flex-col
+          ${isOpen ? "w-[80vw] md:w-1/4 max-w-md p-6 bg-black bg-opacity-80" : "w-0 min-w-0 max-w-0 p-0 bg-transparent"} overflow-hidden`}
+        style={{ pointerEvents: isOpen ? "auto" : "none" }}
       >
         {isOpen && (
-          <div className="w-full h-full flex flex-col">
-            <h2 className="p-4 border-b border-purple-700 font-bold">
+          <>
+            <p className="text-purple-400 font-semibold text-xs uppercase tracking-widest mb-4">
               Navigation
-            </h2>
-            <nav className="flex flex-col p-4 space-y-3">
-              <a href="#" className="hover:text-purple-400">Dashboard</a>
-              <a href="#" className="hover:text-purple-400">Hook Generator</a>
-              <a href="#" className="hover:text-purple-400">Saved Hooks</a>
-              <a href="#" className="hover:text-purple-400">Account Settings</a>
-            </nav>
-          </div>
+            </p>
+
+            <ul className="space-y-5 text-[15px] font-semibold tracking-tight">
+              <li>
+                <a href="#" className="text-white hover:text-purple-400 transition-colors">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-white hover:text-purple-400 transition-colors">
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-white hover:text-purple-400 transition-colors">
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-white hover:text-purple-400 transition-colors">
+                  Settings
+                </a>
+              </li>
+            </ul>
+          </>
         )}
       </div>
-    </div>
+    </>
   );
 }

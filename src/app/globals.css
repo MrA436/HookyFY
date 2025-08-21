@@ -1,6 +1,5 @@
 @import "tailwindcss/preflight";
 @import "tailwindcss/utilities";
-/* Removed theme import — it's not part of official Tailwind modules unless custom configured */
 @import "tailwindcss/theme";
 
 /* === Custom Theme Vars === */
@@ -97,3 +96,10 @@ body.sidebar-expanded #main-content {
   outline: 1px solid red !important;
   box-sizing: border-box;
 } */
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+
+
