@@ -61,8 +61,8 @@ export default function LeaderboardSidebar({ isOpen, closeSidebar }) {
 
           {/* 🏷️ TAGLINE at bottom */}
           <div className="mt-auto pt-4 border-t border-white/5 text-center">
-            <span className="text-[11px] tracking-[0.3em] uppercase text-neutral-500">
-              Power. Discipline. Mastery.
+            <span className="text-[10.9px] tracking-[0.3em] uppercase text-neutral-500">
+              Power•Discipline•Mastery
             </span>
           </div>
         </div>

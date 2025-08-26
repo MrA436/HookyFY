@@ -1,77 +1,102 @@
 "use client";
 import React from "react";
-import { Menu } from "lucide-react";
+import { Menu, Home, Wand2, Bookmark, Info, Settings, User } from "lucide-react";
+import Link from "next/link";
 
 export default function Sidebar({ isOpen, openSidebar, closeSidebar }) {
+  const activePath = "/"; // later: get from router to highlight current page
+
+  const navItems = [
+    { href: "/", label: "Home", icon: <Home className="w-4 h-4" /> },
+    { href: "/generate", label: "Generate", icon: <Wand2 className="w-4 h-4" /> },
+    { href: "/saved", label: "Saved", icon: <Bookmark className="w-4 h-4" /> },
+  ];
+
   return (
     <>
-      {/* 🔥 BACKGROUND OVERLAY (click to close) */}
+      {/* 🔥 BACKDROP */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-20 bg-black/30 backdrop-blur-[1px] transition-opacity duration-300"
+          className="fixed inset-0 z-20 bg-black/40 backdrop-blur-[2px]"
           onClick={closeSidebar}
         />
       )}
 
-      {/* 🟣 TOGGLE BUTTON - Only show when sidebar is closed */}
+      {/* 🟣 FLOATING BUTTON */}
       {!isOpen && (
         <button
-          onClick={openSidebar}  // calls openLeftSidebar from parent
+          onClick={openSidebar}
           className="fixed z-40 bottom-6 left-6 p-3 rounded-full text-white shadow-xl
-                    bg-gradient-to-tr from-[#0b0612] to-[#000000]
-                    hover:from-[#140a1e] hover:to-[#050505]
-                    transition-all duration-300 ease-in-out
-                    md:top-4 md:left-4 md:bottom-auto md:rounded-lg"
+                     bg-gradient-to-tr from-[#0b0612] to-[#000000]
+                     hover:from-[#140a1e] hover:to-[#050505]
+                     transition-all duration-300 ease-in-out
+                     md:top-4 md:left-4 md:bottom-auto md:rounded-lg"
         >
           <Menu className="w-5 h-5" />
         </button>
       )}
 
-      
-      {/* 🟣 DESKTOP HOVER HOTSPOT - hidden on mobile */}
-      {!isOpen && (
-        <div
-          onMouseEnter={openSidebar}
-          className="absolute top-0 left-0 h-full w-2 bg-purple-600 opacity-10 hover:opacity-40 cursor-pointer z-10 hidden md:block"
-        />
-      )}
-
-      {/* 🎯 SIDEBAR PANEL */}
+      {/* 🎯 SIDEBAR */}
       <div
         onMouseLeave={closeSidebar}
         className={`fixed top-0 left-0 h-full z-30 text-white transition-all duration-300 ease-in-out
-          border-r border-purple-800 shadow-xl rounded-r-xl flex flex-col
-          ${isOpen ? "w-[80vw] md:w-1/4 max-w-md p-6 bg-black bg-opacity-80" : "w-0 min-w-0 max-w-0 p-0 bg-transparent"} overflow-hidden`}
+          border-r border-purple-800 shadow-xl rounded-r-xl flex flex-col justify-between
+          ${isOpen ? "w-[80vw] md:w-56 p-4 bg-black/90" : "w-0 min-w-0 max-w-0 p-0 bg-transparent"} overflow-hidden`}
         style={{ pointerEvents: isOpen ? "auto" : "none" }}
       >
         {isOpen && (
           <>
-            <p className="text-purple-400 font-semibold text-xs uppercase tracking-widest mb-4">
-              Navigation
-            </p>
+            {/* 🔥 LOGO */}
+            <div className="mb-6">
+              <h1 className="text-lg font-bold tracking-tight">Hooky<span className="text-purple-400">FY</span></h1>
+              <p className="text-[11px] text-gray-400">Create. Save. Dominate.</p>
+            </div>
 
-            <ul className="space-y-5 text-[15px] font-semibold tracking-tight">
-              <li>
-                <a href="#" className="text-white hover:text-purple-400 transition-colors">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white hover:text-purple-400 transition-colors">
-                  Dashboard
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white hover:text-purple-400 transition-colors">
-                  Profile
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white hover:text-purple-400 transition-colors">
-                  Settings
-                </a>
-              </li>
-            </ul>
+            {/* 📂 NAVIGATION */}
+            <div className="flex-1">
+              <p className="text-purple-400 text-[11px] font-semibold uppercase tracking-wider mb-2">Core</p>
+              <ul className="space-y-1">
+                {navItems.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className={`flex items-center gap-3 px-2 py-2 rounded-md transition-colors
+                        ${activePath === item.href
+                          ? "bg-purple-900/40 text-purple-300 border-l-2 border-purple-500"
+                          : "text-gray-200 hover:text-purple-400 hover:bg-white/5"
+                        }`}
+                    >
+                      {item.icon} {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Divider */}
+              <div className="my-4 border-t border-purple-900/50" />
+
+              <p className="text-purple-400 text-[11px] font-semibold uppercase tracking-wider mb-2">Account</p>
+              <ul className="space-y-1">
+                <li>
+                  <Link href="/profile" className="flex items-center gap-3 px-2 py-2 text-gray-200 hover:text-purple-400 hover:bg-white/5 rounded-md">
+                    <User className="w-4 h-4" /> Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/settings" className="flex items-center gap-3 px-2 py-2 text-gray-200 hover:text-purple-400 hover:bg-white/5 rounded-md">
+                    <Settings className="w-4 h-4" /> Settings
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* ⚡ FOOTER */}
+            <div className="text-[11px] text-gray-500 border-t border-purple-900/50 pt-3">
+              <Link href="/about" className="flex items-center gap-2 text-gray-400 hover:text-purple-400">
+                <Info className="w-3 h-3" /> About
+              </Link>
+              <p className="mt-2">© 2025 HookyFY</p>
+            </div>
           </>
         )}
       </div>
